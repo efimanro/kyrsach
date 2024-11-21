@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистика військової потужності України</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #2a3e50;
+            color: #fff;
+            padding: 20px;
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #2a3e50;
+        }
+        .charts {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .chart-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container canvas {
+            max-width: 100%;
+        }
+        footer {
+            background-color: #2a3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Головна</a>
+            <a href="statistics.html">Статистика</a>
+            <a href="about.html">Про нас</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h1>Статистика військової потужності України</h1>
+            <p>
+                Військова потужність України постійно зростає завдяки міжнародній підтримці, модернізації армії та збільшенню 
+                фінансування. Ми зібрали ключові показники, щоб продемонструвати, як Україна зміцнює свої оборонні можливості.
+            </p>
+        </section>
+
+        <section class="charts">
+            <div class="chart-container">
+                <h2>Розподіл військової техніки</h2>
+                <canvas id="equipmentChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Чисельність особового складу</h2>
+                <canvas id="personnelChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Порівняння з іншими країнами</h2>
+                <canvas id="comparisonChart"></canvas>
+            </div>
+        </section>
+
+        <section class="additional-stats">
+            <h2>Додаткові дані</h2>
+            <p>
+                <strong>Фінансування оборони:</strong> У 2023 році бюджет на оборону перевищив $30 мільярдів, з яких понад 
+                $15 мільярдів було спрямовано на закупівлю сучасного озброєння.<br>
+                <strong>Системи ППО:</strong> Включають комплекси Patriot, NASAMS, IRIS-T, які захищають стратегічно важливі об'єкти.<br>
+                <strong>Міжнародна підтримка:</strong> Україна отримала понад 50 танків Leopard 2, артилерійські установки HIMARS та 
+                понад 100 бойових дронів від союзників.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Контактна інформація: info@portal.com | Тел: +380 123 456 789</p>
+        <p>© 2024 Військовий портал України. Всі права захищено.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Графік розподілу військової техніки
+            const equipmentCtx = document.getElementById("equipmentChart").getContext("2d");
+            new Chart(equipmentCtx, {
+                type: "bar",
+                data: {
+                    labels: ["Танки", "Бронетехніка", "Літаки", "Гелікоптери", "Артилерія"],
+                    datasets: [{
+                        label: "Кількість",
+                        data: [2000, 10000, 350, 100, 1800],
+                        backgroundColor: ["#0078d4", "#00a2ff", "#00e5ff", "#00509e", "#002e7a"]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true, position: "top" },
+                        title: { display: true, text: "Розподіл військової техніки" }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Графік чисельності особового складу
+            const personnelCtx = document.getElementById("personnelChart").getContext("2d");
+            new Chart(personnelCtx, {
+                type: "doughnut",
+                data: {
+                    labels: ["Солдати", "Резервісти", "Добровольці"],
+                    datasets: [{
+                        label: "Чисельність",
+                        data: [200000, 900000, 50000],
+                        backgroundColor: ["#0078d4", "#00a2ff", "#002e7a"]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "top" },
+                        title: { display: true, text: "Чисельність особового складу" }
+                    }
+                }
+            });
+
+            // Порівняння з іншими країнами
+            const comparisonCtx = document.getElementById("comparisonChart").getContext("2d");
+            new Chart(comparisonCtx, {
+                type: "radar",
+                data: {
+                    labels: ["Танки", "Літаки", "Гелікоптери", "Артилерія", "Солдати"],
+                    datasets: [
+                        {
+                            label: "Україна",
+                            data: [2000, 350, 100, 1800, 200000],
+                            backgroundColor: "rgba(0, 120, 212, 0.2)",
+                            borderColor: "#0078d4"
+                        },
+                        {
+                            label: "Росія",
+                            data: [12000, 1500, 500, 7000, 1200000],
+                            backgroundColor: "rgba(255, 99, 132, 0.2)",
+                            borderColor: "rgba(255, 99, 132, 1)"
+                        },
+                        {
+                            label: "Польща",
+                            data: [1000, 300, 100, 1500, 120000],
+                            backgroundColor: "rgba(54, 162, 235, 0.2)",
+                            borderColor: "rgba(54, 162, 235, 1)"
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "top" },
+                        title: { display: true, text: "Порівняння військової потужності" }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
